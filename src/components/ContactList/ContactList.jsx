@@ -2,12 +2,12 @@ import css from "./ContactList.module.css";
 
 import { Contact } from "../Contact/Contact";
 import { useDispatch, useSelector } from "react-redux";
-import { inputedFilter } from "../../redux/selectors";
+import { selectContacts, inputedFilter } from "../../redux/selectors";
 import { useEffect } from "react";
 import { fetchingContacts } from "../../redux/contacts/contactsOperations";
 
 export const ContactList = () => {
-  const { items, isLoading, error } = useSelector((state) => state.contacts);
+  const { items, isLoading, error } = useSelector(selectContacts);
 
   const filter = useSelector(inputedFilter);
   const filteredContacts = items.filter((contact) =>
@@ -23,6 +23,7 @@ export const ContactList = () => {
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
   if (error.status) {
     return <p>Error: {error.message}!</p>;
   }
