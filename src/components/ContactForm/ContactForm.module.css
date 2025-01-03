@@ -1,0 +1,12 @@
+.form-component {
+  height: 60px;
+}
+.submit-btn {
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.7rem;
+}
