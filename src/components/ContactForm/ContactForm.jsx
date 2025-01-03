@@ -5,11 +5,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contacts/contactsSlice";
 
 const initialValues = {
   name: "",
-  number: "",
+  phone: "",
 };
 
 const Schema = Yup.object().shape({
@@ -17,7 +17,7 @@ const Schema = Yup.object().shape({
     .min(3, "Make it longer")
     .max(50, "Make it shorter")
     .required("Enter name"),
-  number: Yup.string()
+  phone: Yup.string()
     .matches("^([0-9]{3}-){2}[0-9]{2}$", "Correct format: xxx-xxx-xx")
     .required("Enter phone number"),
 });
@@ -25,7 +25,7 @@ const Schema = Yup.object().shape({
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const nameFieldId = useId();
-  const numberFieldId = useId();
+  const phoneFieldId = useId();
 
   const handleSubmit = (values, actions) => {
     dispatch(addContact(values));
@@ -57,19 +57,19 @@ export const ContactForm = () => {
           />
         </div>
         <div className={css["form-component"]}>
-          <label className="label" htmlFor={numberFieldId}>
+          <label className="label" htmlFor={phoneFieldId}>
             Number
           </label>
           <Field
             className="field"
             type="tel"
-            name="number"
-            id={numberFieldId}
+            name="phone"
+            id={phoneFieldId}
             placeholder="xxx-xxx-xx"
           />
           <ErrorMessage
             className={css["error-message"]}
-            name="number"
+            name="phone"
             component="span"
           />
         </div>
